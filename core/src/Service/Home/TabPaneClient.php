@@ -8,12 +8,16 @@ use App\Service\Home\TabPane\MySqlTabPane;
 
 class TabPaneClient
 {
+    public function __construct(private readonly MongoDbTabPane $mongoDbTabPane)
+    {
+    }
+
     public function create(): array
     {
         $tabPaneList = new TabPaneList();
-        $mongoDbPane = (new MongoDbTabPane())
-            ->setNextPane(new MySqlTabPane());
-        $mongoDbPane->apply($tabPaneList);
+        $this->mongoDbTabPane
+            ->setNextPane(new MySqlTabPane())
+            ->apply($tabPaneList);
 
         return $tabPaneList->toArray();
     }

@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 py-4">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <ul class="nav nav-tabs" id="mainTab" role="tablist">
                     {% for tabPane in tabPanes %}
                         <li class="nav-item" role="presentation">
                             <button
@@ -29,7 +29,7 @@
             </div>
 
             <div class="col-12 py-4">
-                <div class="tab-content" id="myTabContent">
+                <div class="tab-content" id="mainTabContent">
                     {% for tabPane in tabPanes %}
                         <div
                                 class="tab-pane fade{% if loop.first %} show active{% endif %}"
@@ -38,7 +38,15 @@
                                 aria-labelledby="{{ tabPane.id }}"
                                 tabindex="0"
                         >
-                            {{ tabPane.name }}
+                            <div class="row">
+                                {% for button in tabPane.buttons %}
+                                    <div class="col-auto">
+                                        <a href="{{ button.url }}" class="btn {{ btn.colorClassName }}">
+                                            {{ button.text }}
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
                         </div>
                     {% endfor %}
                 </div>

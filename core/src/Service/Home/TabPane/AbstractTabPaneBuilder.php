@@ -15,8 +15,10 @@ abstract class AbstractTabPaneBuilder
         return $this;
     }
 
-    public function apply(TabPaneList $tabPaneList): void
+    public function apply(TabPaneList $tabPaneList): self
     {
         $this->nextPane?->apply($tabPaneList);
+
+        return $this;
     }
 }
