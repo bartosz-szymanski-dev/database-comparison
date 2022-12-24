@@ -1,0 +1,21 @@
+
+###> symfony/framework-bundle ###
+/core/.env.local
+/core/.env.local.php
+/core/.env.*.local
+/core/config/secrets/prod/prod.decrypt.private.php
+/core/public/bundles/
+/core/var/
+/core/vendor/
+###< symfony/framework-bundle ###
+
+###> phpunit/phpunit ###
+/core/phpunit.xml
+/core/.phpunit.result.cache
+###< phpunit/phpunit ###
+
+###> mongo ###
+/mongo/*
+###< mongo ###
+
+.idea

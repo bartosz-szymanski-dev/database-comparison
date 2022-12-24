@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  nginx:
+    build: nginx
+    container_name: reverse-proxy-nginx
+    links:
+      - core
+    ports:
+      - "8080:80"
+
+  core:
+    build: core
+    container_name: core-service
+    image: ubuntu:focal
+    volumes:
+      - "./core:/var/www/html"
+    working_dir: "/var/www/html"
+    command: "tail -f /dev/null"
+    links:
+      - mysql
+      - mongo
+    depends_on:
+      - mysql
+      - mongo
+
+  mysql:
+    container_name: mysql-service
+    image: mariadb:10.6
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: sdiwpil
+      MYSQL_USER: sdiwpil
+      MYSQL_PASSWORD: secret
+    ports:
+      - "9906:3306"
+
+  mongo:
+    container_name: mongo-service
+    image: mongo:focal
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: evp
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: secret
+    ports:
+      - "27017-27019:27017-27019"
+    volumes:
+      - ./mongo:/data/db
+
+networks:
+  core:
+    name: core_default

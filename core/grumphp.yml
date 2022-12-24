@@ -1,0 +1,27 @@
+grumphp:
+    tasks:
+        phpcs:
+            standard: "PSR12"
+            encoding: "UTF-8"
+            ignore_patterns:
+                - 'src/DoctrineMigrations/'
+                - 'shared/'
+                - 'var/'
+                - 'public/'
+                - 'public_html/'
+                - 'deploy/'
+                - 'vendor/'
+                - 'deploy.php'
+        git_blacklist:
+            keywords:
+                - "die("
+                - "var_dump("
+                - "VarDumper::dump("
+                - "exit;"
+                - "dd("
+                - "dump("
+            triggered_by: [php]
+        git_commit_message:
+            max_body_width: 120
+            max_subject_width: 120
+            enforce_capitalized_subject: false

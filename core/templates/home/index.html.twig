@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Strona główna{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 py-4">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    {% for tabPane in tabPanes %}
+                        <li class="nav-item" role="presentation">
+                            <button
+                                    class="nav-link{% if loop.first %} active{% endif %}"
+                                    id="{{ tabPane.id }}"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#{{ tabPane.target }}"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="{{ tabPane.target }}"
+                                    aria-selected="true"
+                            >
+                                {{ tabPane.name }}
+                            </button>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="col-12 py-4">
+                <div class="tab-content" id="myTabContent">
+                    {% for tabPane in tabPanes %}
+                        <div
+                                class="tab-pane fade{% if loop.first %} show active{% endif %}"
+                                id="{{ tabPane.target }}"
+                                role="tabpanel"
+                                aria-labelledby="{{ tabPane.id }}"
+                                tabindex="0"
+                        >
+                            {{ tabPane.name }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
