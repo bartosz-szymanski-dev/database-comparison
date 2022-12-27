@@ -6,6 +6,7 @@ use App\Model\Home\Button;
 use App\Model\Home\TabPane\TabPane;
 use App\Model\Home\TabPane\TabPaneList;
 use App\Service\Home\Button\MongoDB\CreateButtonBuilder;
+use App\Service\Home\Button\MongoDB\DeleteAllButtonBuilder;
 use App\Service\Home\Button\MongoDB\GetAllButtonBuilder;
 use App\Service\Home\Button\MongoDB\UpdateAllButtonBuilder;
 use App\Service\Home\TabPane\MongoDbTabPane;
@@ -21,10 +22,16 @@ class MongoDbTabPaneTest extends TestCase
     {
         $this->urlGenerator = $this->createMock(UrlGeneratorInterface::class);
         $this->initMockUrlGenerator();
-        $this->mongoDbTabPane = new MongoDbTabPane(
+        $this->mongoDbTabPane = $this->getDbTabPane();
+    }
+
+    private function getDbTabPane(): MongoDbTabPane
+    {
+        return new MongoDbTabPane(
             new CreateButtonBuilder($this->urlGenerator),
             new GetAllButtonBuilder($this->urlGenerator),
             new UpdateAllButtonBuilder($this->urlGenerator),
+            new DeleteAllButtonBuilder($this->urlGenerator),
         );
     }
 
@@ -36,7 +43,8 @@ class MongoDbTabPaneTest extends TestCase
             ->willReturn(
                 '/mongo-db/create',
                 '/mongo-db/get-all',
-                '/mongo-db/update-all'
+                '/mongo-db/update-all',
+                '/mongo-db/delete-all'
             );
     }
 
@@ -53,7 +61,8 @@ class MongoDbTabPaneTest extends TestCase
         $blankTabPane
             ->addButton($this->getCreateButton())
             ->addButton($this->getGetAllButton())
-            ->addButton($this->getUpdateAllButton());
+            ->addButton($this->getUpdateAllButton())
+            ->addButton($this->getDeleteAllButton());
         $expected->addTabPane($blankTabPane);
 
         $this->assertEquals($expected, $actual);
@@ -80,5 +89,13 @@ class MongoDbTabPaneTest extends TestCase
             ->setText('Zaktualizuj dane')
             ->setUrl('/mongo-db/update-all')
             ->setColorClassName('btn-danger');
+    }
+
+    private function getDeleteAllButton(): Button
+    {
+        return (new Button())
+            ->setText('Usuń wszystkie dane')
+            ->setUrl('/mongo-db/delete-all')
+            ->setColorClassName('btn-warning');
     }
 }

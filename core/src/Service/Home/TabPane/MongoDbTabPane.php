@@ -6,6 +6,7 @@ use App\Model\Home\TabPane\TabPane;
 use App\Model\Home\TabPane\TabPaneList;
 use App\Service\Home\Button\AbstractButtonBuilder;
 use App\Service\Home\Button\MongoDB\CreateButtonBuilder;
+use App\Service\Home\Button\MongoDB\DeleteAllButtonBuilder;
 use App\Service\Home\Button\MongoDB\GetAllButtonBuilder;
 use App\Service\Home\Button\MongoDB\UpdateAllButtonBuilder;
 
@@ -17,11 +18,13 @@ class MongoDbTabPane extends AbstractTabPaneBuilder
         private readonly CreateButtonBuilder $createButtonBuilder,
         private readonly GetAllButtonBuilder $getAllButtonBuilder,
         private readonly UpdateAllButtonBuilder $updateAllButtonBuilder,
+        private readonly DeleteAllButtonBuilder $deleteAllButtonBuilder,
     ) {
         $this->buttonBuilders = [
             $this->createButtonBuilder,
             $this->getAllButtonBuilder,
             $this->updateAllButtonBuilder,
+            $this->deleteAllButtonBuilder,
         ];
     }
 
