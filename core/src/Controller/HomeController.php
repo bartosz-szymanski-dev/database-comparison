@@ -9,8 +9,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'front.home')]
-    public function index(TabPaneClient $tabPaneClient): Response
+    #[Route('/', name: 'front.home', methods: ['GET', 'HEAD'])]
+    public function __invoke(TabPaneClient $tabPaneClient): Response
     {
         $parameters = ['tabPanes' => $tabPaneClient->create()];
 
