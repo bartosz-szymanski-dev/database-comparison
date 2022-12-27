@@ -9,6 +9,7 @@ class CreateControllerTest extends AbstractControllerTest
 {
     public function testDefaultAction(): void
     {
+
         $this->makeRequest('POST', '/mongo-db/create');
         $this->assertResponseIsSuccessful();
     }
