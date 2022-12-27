@@ -42,9 +42,9 @@ class MongoDbTabPane extends AbstractTabPaneBuilder
 
     private function addButtons(TabPane $tabPane): void
     {
-        /** @var AbstractButtonBuilder $builder */
-        foreach ($this->buttonBuilders as $builder) {
-            $tabPane->addButton($builder->create());
+        /** @var AbstractButtonBuilder $buttonBuilder */
+        foreach ($this->buttonBuilders as $buttonBuilder) {
+            $tabPane->addButton($buttonBuilder->create());
         }
     }
 }
