@@ -2,14 +2,14 @@
 
 namespace App\Tests\Controller\MongoDB;
 
+use App\Tests\Controller\AbstractControllerTest;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class CreateControllerTest extends WebTestCase
+class CreateControllerTest extends AbstractControllerTest
 {
     public function testDefaultAction(): void
     {
-        $client = static::createClient();
-        $client->request('POST', '/mongo-db/create');
+        $this->makeRequest('POST', '/mongo-db/create');
         $this->assertResponseIsSuccessful();
     }
 }

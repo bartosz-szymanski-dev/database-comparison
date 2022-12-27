@@ -14,6 +14,11 @@
 /core/.phpunit.result.cache
 ###< phpunit/phpunit ###
 
+###> squizlabs/php_codesniffer ###
+/core/.phpcs-cache
+/core/phpcs.xml*
+###< squizlabs/php_codesniffer ###
+
 ###> mongo ###
 /mongo/*
 ###< mongo ###

@@ -2,17 +2,14 @@
 
 namespace App\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
-class HomeControllerTest extends WebTestCase
+class HomeControllerTest extends AbstractControllerTest
 {
     /**
      * @dataProvider defaultActionSuccessfulDataProvider
      */
     public function testDefaultActionSuccessful(string $method): void
     {
-        $client = static::createClient();
-        $client->request('GET', '/');
+        $this->makeRequest('GET', '/');
         $this->assertResponseIsSuccessful();
     }
 
@@ -29,8 +26,7 @@ class HomeControllerTest extends WebTestCase
      */
     public function testMethodsOtherThanGETOrHEADAreNotAllowed(string $method): void
     {
-        $client = static::createClient();
-        $client->request($method, '/');
+        $this->makeRequest($method, '/');
         $this->assertResponseStatusCodeSame(405);
     }
 
