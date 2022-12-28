@@ -10,22 +10,19 @@ use App\Service\Home\Button\MongoDB\DeleteAllButtonBuilder;
 use App\Service\Home\Button\MongoDB\GetAllButtonBuilder;
 use App\Service\Home\Button\MongoDB\UpdateAllButtonBuilder;
 use App\Service\Home\TabPane\MongoDbTabPane;
-use PHPUnit\Framework\TestCase;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class MongoDbTabPaneTest extends TestCase
+class MongoDbTabPaneTest extends AbstractTabPaneTest
 {
-    private UrlGeneratorInterface $urlGenerator;
     private MongoDbTabPane $mongoDbTabPane;
 
     protected function setUp(): void
     {
-        $this->urlGenerator = $this->createMock(UrlGeneratorInterface::class);
-        $this->initMockUrlGenerator();
+        parent::setUp();
+
         $this->mongoDbTabPane = $this->getDbTabPane();
     }
 
-    private function getDbTabPane(): MongoDbTabPane
+    protected function getDbTabPane(): MongoDbTabPane
     {
         return new MongoDbTabPane(
             new CreateButtonBuilder($this->urlGenerator),
@@ -35,7 +32,7 @@ class MongoDbTabPaneTest extends TestCase
         );
     }
 
-    private function initMockUrlGenerator(): void
+    protected function initMockUrlGenerator(): void
     {
         $this->urlGenerator
             ->expects($this->any())
@@ -44,7 +41,7 @@ class MongoDbTabPaneTest extends TestCase
                 '/mongo-db/create',
                 '/mongo-db/get-all',
                 '/mongo-db/update-all',
-                '/mongo-db/delete-all'
+                '/mongo-db/delete-all',
             );
     }
 
@@ -68,14 +65,14 @@ class MongoDbTabPaneTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    public function getCreateButton(): Button
+    protected function getCreateButton(): Button
     {
         return (new Button())
             ->setText('Stwórz dane')
             ->setUrl('/mongo-db/create');
     }
 
-    public function getGetAllButton(): Button
+    protected function getGetAllButton(): Button
     {
         return (new Button())
             ->setText('Odczytaj dane')
@@ -83,7 +80,7 @@ class MongoDbTabPaneTest extends TestCase
             ->setColorClassName('btn-success');
     }
 
-    private function getUpdateAllButton(): Button
+    protected function getUpdateAllButton(): Button
     {
         return (new Button())
             ->setText('Zaktualizuj dane')
@@ -91,7 +88,7 @@ class MongoDbTabPaneTest extends TestCase
             ->setColorClassName('btn-danger');
     }
 
-    private function getDeleteAllButton(): Button
+    protected function getDeleteAllButton(): Button
     {
         return (new Button())
             ->setText('Usuń wszystkie dane')
