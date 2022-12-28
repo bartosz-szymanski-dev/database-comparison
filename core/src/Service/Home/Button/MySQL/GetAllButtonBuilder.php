@@ -3,6 +3,7 @@
 namespace App\Service\Home\Button\MySQL;
 
 use App\Model\Home\Button;
+use App\Model\Home\ButtonMethod;
 use App\Service\Home\Button\AbstractButtonBuilder;
 
 class GetAllButtonBuilder extends AbstractButtonBuilder
@@ -12,6 +13,7 @@ class GetAllButtonBuilder extends AbstractButtonBuilder
         return (new Button())
             ->setText('Odczytaj dane')
             ->setUrl($this->urlGenerator->generate('front.mysql.get_all'))
-            ->setColorClassName('btn-success');
+            ->setColorClassName('btn-success')
+            ->setMethod(ButtonMethod::GET);
     }
 }

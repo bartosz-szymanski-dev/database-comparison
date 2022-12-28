@@ -3,6 +3,7 @@
 namespace App\Service\Home\Button\MySQL;
 
 use App\Model\Home\Button;
+use App\Model\Home\ButtonMethod;
 use App\Service\Home\Button\AbstractButtonBuilder;
 
 class CreateButtonBuilder extends AbstractButtonBuilder
@@ -11,6 +12,7 @@ class CreateButtonBuilder extends AbstractButtonBuilder
     {
         return (new Button())
             ->setText('Stwórz dane')
-            ->setUrl($this->urlGenerator->generate('front.mysql.create'));
+            ->setUrl($this->urlGenerator->generate('front.mysql.create'))
+            ->setMethod(ButtonMethod::POST);
     }
 }

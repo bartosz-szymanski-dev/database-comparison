@@ -3,6 +3,7 @@
 namespace App\Service\Home\Button\MongoDB;
 
 use App\Model\Home\Button;
+use App\Model\Home\ButtonMethod;
 use App\Service\Home\Button\AbstractButtonBuilder;
 
 class UpdateAllButtonBuilder extends AbstractButtonBuilder
@@ -12,6 +13,7 @@ class UpdateAllButtonBuilder extends AbstractButtonBuilder
         return (new Button())
             ->setText('Zaktualizuj dane')
             ->setUrl($this->urlGenerator->generate('front.mongo_db.update_all'))
-            ->setColorClassName('btn-danger');
+            ->setColorClassName('btn-danger')
+            ->setMethod(ButtonMethod::PUT);
     }
 }

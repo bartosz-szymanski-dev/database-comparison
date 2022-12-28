@@ -43,4 +43,16 @@ class Button extends AbstractModel
     {
         return $this->data['colorClassName'] ?? self::BTN_PRIMARY_COLOR_CLASS_NAME;
     }
+
+    public function setMethod(ButtonMethod $method): self
+    {
+        $this->data['method'] = $method->value;
+
+        return $this;
+    }
+
+    public function getMethod(): string
+    {
+        return $this->data['method'] ?? ButtonMethod::GET->value;
+    }
 }

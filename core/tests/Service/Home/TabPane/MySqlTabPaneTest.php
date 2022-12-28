@@ -3,6 +3,7 @@
 namespace App\Tests\Service\Home\TabPane;
 
 use App\Model\Home\Button;
+use App\Model\Home\ButtonMethod;
 use App\Model\Home\TabPane\TabPane;
 use App\Model\Home\TabPane\TabPaneList;
 use App\Service\Home\Button\MySQL\CreateButtonBuilder;
@@ -70,7 +71,8 @@ class MySqlTabPaneTest extends AbstractTabPaneTest
     {
         return (new Button())
             ->setText('Stwórz dane')
-            ->setUrl('/mysql/create');
+            ->setUrl('/mysql/create')
+            ->setMethod(ButtonMethod::POST);
     }
 
     protected function getGetAllButton(): Button
@@ -78,7 +80,8 @@ class MySqlTabPaneTest extends AbstractTabPaneTest
         return (new Button())
             ->setText('Odczytaj dane')
             ->setUrl('/mysql/get-all')
-            ->setColorClassName('btn-success');
+            ->setColorClassName('btn-success')
+            ->setMethod(ButtonMethod::GET);
     }
 
     protected function getUpdateAllButton(): Button
@@ -86,7 +89,8 @@ class MySqlTabPaneTest extends AbstractTabPaneTest
         return (new Button())
             ->setText('Zaktualizuj dane')
             ->setUrl('/mysql/update-all')
-            ->setColorClassName('btn-danger');
+            ->setColorClassName('btn-danger')
+            ->setMethod(ButtonMethod::PUT);
     }
 
     protected function getDeleteAllButton(): Button
@@ -94,6 +98,7 @@ class MySqlTabPaneTest extends AbstractTabPaneTest
         return (new Button())
             ->setText('Usuń wszystkie dane')
             ->setUrl('/mysql/delete-all')
-            ->setColorClassName('btn-warning');
+            ->setColorClassName('btn-warning')
+            ->setMethod(ButtonMethod::DELETE);
     }
 }

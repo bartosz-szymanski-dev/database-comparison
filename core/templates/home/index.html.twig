@@ -41,7 +41,11 @@
                             <div class="row">
                                 {% for button in tabPane.buttons %}
                                     <div class="col-auto">
-                                        <a href="{{ button.url }}" class="btn {{ button.colorClassName }}">
+                                        <a
+                                                href="{{ button.url }}"
+                                                data-method="{{ button.method }}"
+                                                class="btn {{ button.colorClassName }}"
+                                        >
                                             {{ button.text }}
                                         </a>
                                     </div>

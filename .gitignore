@@ -19,6 +19,13 @@
 /core/phpcs.xml*
 ###< squizlabs/php_codesniffer ###
 
+###> symfony/webpack-encore-bundle ###
+/core/node_modules/
+/core/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###
+
 ###> mongo ###
 /mongo/*
 ###< mongo ###

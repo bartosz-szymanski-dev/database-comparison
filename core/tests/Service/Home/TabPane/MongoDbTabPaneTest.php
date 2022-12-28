@@ -3,6 +3,7 @@
 namespace App\Tests\Service\Home\TabPane;
 
 use App\Model\Home\Button;
+use App\Model\Home\ButtonMethod;
 use App\Model\Home\TabPane\TabPane;
 use App\Model\Home\TabPane\TabPaneList;
 use App\Service\Home\Button\MongoDB\CreateButtonBuilder;
@@ -69,7 +70,8 @@ class MongoDbTabPaneTest extends AbstractTabPaneTest
     {
         return (new Button())
             ->setText('Stwórz dane')
-            ->setUrl('/mongo-db/create');
+            ->setUrl('/mongo-db/create')
+            ->setMethod(ButtonMethod::POST);
     }
 
     protected function getGetAllButton(): Button
@@ -77,7 +79,8 @@ class MongoDbTabPaneTest extends AbstractTabPaneTest
         return (new Button())
             ->setText('Odczytaj dane')
             ->setUrl('/mongo-db/get-all')
-            ->setColorClassName('btn-success');
+            ->setColorClassName('btn-success')
+            ->setMethod(ButtonMethod::GET);
     }
 
     protected function getUpdateAllButton(): Button
@@ -85,7 +88,8 @@ class MongoDbTabPaneTest extends AbstractTabPaneTest
         return (new Button())
             ->setText('Zaktualizuj dane')
             ->setUrl('/mongo-db/update-all')
-            ->setColorClassName('btn-danger');
+            ->setColorClassName('btn-danger')
+            ->setMethod(ButtonMethod::PUT);
     }
 
     protected function getDeleteAllButton(): Button
@@ -93,6 +97,7 @@ class MongoDbTabPaneTest extends AbstractTabPaneTest
         return (new Button())
             ->setText('Usuń wszystkie dane')
             ->setUrl('/mongo-db/delete-all')
-            ->setColorClassName('btn-warning');
+            ->setColorClassName('btn-warning')
+            ->setMethod(ButtonMethod::DELETE);
     }
 }
