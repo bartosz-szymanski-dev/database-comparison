@@ -2,10 +2,11 @@
 
 namespace App\Model\Home\TabPane;
 
-class TabPane
-{
-    private array $data = [];
+use App\Model\AbstractModel;
+use App\Model\Home\Button;
 
+class TabPane extends AbstractModel
+{
     public function setId(string $id): self
     {
         $this->data['id'] = $id;
@@ -40,5 +41,17 @@ class TabPane
     public function getName(): string
     {
         return $this->data['name'] ?? '';
+    }
+
+    public function addButton(Button $button): self
+    {
+        $this->data['buttons'][] = $button;
+
+        return $this;
+    }
+
+    public function getButtons(): array
+    {
+        return $this->data['buttons'] ?? [];
     }
 }

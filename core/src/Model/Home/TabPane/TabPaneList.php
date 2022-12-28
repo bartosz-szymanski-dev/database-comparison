@@ -2,19 +2,19 @@
 
 namespace App\Model\Home\TabPane;
 
-class TabPaneList
-{
-    private array $items = [];
+use App\Model\AbstractModel;
 
+class TabPaneList extends AbstractModel
+{
     public function addTabPane(TabPane $tabPane): self
     {
-        $this->items[] = $tabPane;
+        $this->data[] = $tabPane;
 
         return $this;
     }
 
     public function toArray(): array
     {
-        return $this->items;
+        return $this->data;
     }
 }
