@@ -25,10 +25,3 @@ grumphp:
             max_body_width: 120
             max_subject_width: 120
             enforce_capitalized_subject: false
-        phpunit:
-            config_file: ~
-            testsuite: ~
-            group: [ ]
-            exclude_group: [ ]
-            always_execute: false
-            order: null
