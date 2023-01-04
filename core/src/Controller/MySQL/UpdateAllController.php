@@ -11,7 +11,7 @@ class UpdateAllController extends AbstractController
     #[Route(
         path: '/mysql/update-all',
         name: 'front.mysql.update_all',
-        methods: ['PUT', 'PATCH'],
+        methods: ['GET', 'HEAD'],
     )]
     public function __invoke(): Response
     {

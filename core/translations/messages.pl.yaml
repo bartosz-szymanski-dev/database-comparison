@@ -1,0 +1,11 @@
+action_type.create: 'Stwórz dane'
+action_type.get_all: 'Pobierz wszystkie dane'
+action_type.update_all: 'Zaktualizuj wszystkie dane'
+action_type.delete_all: 'Usuń wszystkie dane'
+
+db.mongo: 'Mongo DB'
+db.mysql: 'MySQL'
+
+form.db_type: 'Silnik zarządzania bazą danych'
+form.action: 'Typ akcji'
+form.submit: 'Wyślij'

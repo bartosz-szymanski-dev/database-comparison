@@ -11,7 +11,7 @@ class DeleteAllController extends AbstractController
     #[Route(
         path: '/mongo-db/delete-all',
         name: 'front.mongo_db.delete_all',
-        methods: ['DELETE']
+        methods: ['GET', 'HEAD']
     )]
     public function __invoke(): Response
     {

@@ -3,6 +3,7 @@
 namespace App\Controller\MongoDB;
 
 use App\Entity\MongoDB\ElectricVehiclePopulationDataDocument;
+use App\Service\Action\GetAllActionService;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,17 +16,19 @@ class GetAllController extends AbstractController
         name: 'front.mongo_db.get_all',
         methods: ['GET', 'HEAD'],
     )]
-    public function __invoke(DocumentManager $documentManager): Response
-    {
+    public function __invoke(
+        DocumentManager $documentManager,
+        GetAllActionService $getAllActionService,
+    ): Response {
         ini_set('memory_limit', '2G');
-        $evpRepository = $documentManager->getRepository(ElectricVehiclePopulationDataDocument::class);
-        $startingTime = microtime(true);
-        $items = $evpRepository->findAll();
-        $endTime = microtime(true) - $startingTime;
+        $getAllActionService
+            ->withObjectManager($documentManager)
+            ->withObjectClassName(ElectricVehiclePopulationDataDocument::class)
+            ->dispatchAction();
 
         return $this->render('MongoDB/get_all.html.twig', [
-            'queryExecutionTime' => round($endTime, 2),
-            'recordCount' => count($items),
+            'executionTime' => round($getAllActionService->getExecutionTime(), 2),
+            'recordCount' => $getAllActionService->getRowCounter(),
         ]);
     }
 }

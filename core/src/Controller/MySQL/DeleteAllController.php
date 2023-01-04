@@ -11,7 +11,7 @@ class DeleteAllController extends AbstractController
     #[Route(
         path: '/mysql/delete-all',
         name: 'front.mysql.delete_all',
-        methods: ['DELETE'],
+        methods: ['GET', 'HEAD'],
     )]
     public function __invoke(): Response
     {

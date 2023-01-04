@@ -11,7 +11,7 @@ class CreateController extends AbstractController
     #[Route(
         path: '/mysql/create',
         name: 'front.mysql.create',
-        methods: ['POST'],
+        methods: ['GET', 'HEAD'],
     )]
     public function __invoke(): Response
     {

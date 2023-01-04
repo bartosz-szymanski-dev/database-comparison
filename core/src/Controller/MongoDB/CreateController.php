@@ -6,9 +6,7 @@ use App\Service\Action\CreateActionService;
 use App\Service\Factory\Entity\MongoDB\ElectricVehiclePopulationDataDocumentFactory;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CreateController extends AbstractController
@@ -16,10 +14,9 @@ class CreateController extends AbstractController
     #[Route(
         '/mongo-db/create',
         name: 'front.mongo_db.create',
-        methods: ['POST'],
+        methods: ['GET', 'HEAD'],
     )]
     public function __invoke(
-        KernelInterface $kernel,
         DocumentManager $documentManager,
         ElectricVehiclePopulationDataDocumentFactory $evpDataFactory,
         CreateActionService $createActionService,
@@ -30,6 +27,9 @@ class CreateController extends AbstractController
             ->withFactory($evpDataFactory)
             ->dispatchAction();
 
-        return new JsonResponse(['rowCounter' => $createActionService->getRowCounter()]);
+        return $this->render('MongoDB/create.html.twig', [
+            'rowCounter' => $createActionService->getRowCounter(),
+            'executionTime' => $createActionService->getExecutionTime(),
+        ]);
     }
 }

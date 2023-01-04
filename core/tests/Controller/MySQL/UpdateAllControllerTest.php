@@ -20,8 +20,8 @@ class UpdateAllControllerTest extends AbstractControllerTest
     public function defaultValidActionDataProvider(): array
     {
         return [
-            'put' => ['PUT'],
-            'patch' => ['PATCH'],
+            'get' => ['GET'],
+            'head' => ['HEAD'],
         ];
     }
 
@@ -37,8 +37,6 @@ class UpdateAllControllerTest extends AbstractControllerTest
     public function defaultActionMethodIsNotAllowedDataProvider(): array
     {
         return [
-            'get' => ['GET'],
-            'head' => ['HEAD'],
             'post' => ['POST'],
             'delete' => ['DELETE'],
         ];

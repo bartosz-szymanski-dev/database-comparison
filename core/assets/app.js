@@ -6,7 +6,3 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
-import TabButtonHandler from './js/TabButtonHandler';
-
-const tabButtonHandler = new TabButtonHandler();
-tabButtonHandler.init();

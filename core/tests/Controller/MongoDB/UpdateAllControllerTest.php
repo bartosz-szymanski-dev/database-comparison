@@ -18,9 +18,8 @@ class UpdateAllControllerTest extends AbstractControllerTest
     public function defaultActionDataProvider(): array
     {
         return [
-            'post' => ['POST'],
-            'put' => ['PUT'],
-            'patch' => ['PATCH'],
+            'get' => ['GET'],
+            'head' => ['HEAD'],
         ];
     }
 }

@@ -11,7 +11,7 @@ class UpdateAllController extends AbstractController
     #[Route(
         '/mongo-db/update-all',
         name: 'front.mongo_db.update_all',
-        methods: ['PUT', 'PATCH', 'POST'],
+        methods: ['GET', 'HEAD'],
     )]
     public function __invoke(): Response
     {

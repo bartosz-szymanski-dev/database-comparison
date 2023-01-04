@@ -3,17 +3,13 @@
 namespace App\Service\Action;
 
 use App\Service\Factory\Entity\FactoryInterface;
-use Doctrine\Persistence\ObjectManager;
 use League\Csv\Reader;
 use League\Csv\Statement;
 use League\Csv\TabularDataReader;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-class CreateActionService
+class CreateActionService extends AbstractActionService
 {
-    private int $rowCounter;
-
-    private ObjectManager $objectManager;
     private FactoryInterface $factory;
 
     public function __construct(private readonly KernelInterface $kernel)
@@ -22,11 +18,12 @@ class CreateActionService
 
     public function dispatchAction(): self
     {
-        $this->rowCounter = 0;
+        parent::dispatchAction();
         foreach ($this->getRecords() as $record) {
             $this->flushAndClear();
             $this->createAndPersist($record);
         }
+        $this->executionTime = microtime(true) - $this->executionTime;
 
         return $this;
     }
@@ -53,18 +50,6 @@ class CreateActionService
     {
         $data = $this->factory->createFromImportItem($record);
         $this->objectManager->persist($data);
-    }
-
-    public function getRowCounter(): int
-    {
-        return $this->rowCounter ?? 0;
-    }
-
-    public function withObjectManager(ObjectManager $objectManager): self
-    {
-        $this->objectManager = $objectManager;
-
-        return $this;
     }
 
     public function withFactory(FactoryInterface $factory): self

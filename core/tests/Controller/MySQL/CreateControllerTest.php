@@ -10,7 +10,7 @@ class CreateControllerTest extends AbstractControllerTest
 
     public function testDefaultValidAction(): void
     {
-        $this->makeRequest('POST', self::MYSQL_CREATE_URI);
+        $this->makeRequest('GET', self::MYSQL_CREATE_URI);
         $this->assertResponseIsSuccessful();
     }
 
@@ -26,8 +26,6 @@ class CreateControllerTest extends AbstractControllerTest
     public function defaultActionMethodIsNotAllowedDataProvider(): array
     {
         return [
-            'get' => ['GET'],
-            'head' => ['HEAD'],
             'put' => ['PUT'],
             'patch' => ['PATCH'],
             'delete' => ['DELETE'],

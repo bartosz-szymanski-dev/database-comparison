@@ -10,7 +10,7 @@ class DeleteAllControllerTest extends AbstractControllerTest
 
     public function testDefaultValidAction(): void
     {
-        $this->makeRequest('DELETE', self::MONGO_DB_DELETE_ALL_URI);
+        $this->makeRequest('GET', self::MONGO_DB_DELETE_ALL_URI);
         $this->assertResponseIsSuccessful();
     }
 
@@ -26,8 +26,6 @@ class DeleteAllControllerTest extends AbstractControllerTest
     public function defaultActionMethodIsNotAllowedDataProvider(): array
     {
         return [
-            'get' => ['GET'],
-            'head' => ['HEAD'],
             'post' => ['POST'],
             'put' => ['PUT'],
             'patch' => ['PATCH'],
