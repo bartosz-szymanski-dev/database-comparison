@@ -35,4 +35,9 @@ abstract class AbstractActionService
 
         return $this;
     }
+
+    protected function setExecutionTime(): void
+    {
+        $this->executionTime = microtime(true) - $this->executionTime;
+    }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Service\Factory\Entity;
 
-use App\Entity\DataInterface;
+use App\Model\DataInterface;
 
 interface FactoryInterface
 {

@@ -11,7 +11,7 @@ class GetAllActionService extends AbstractActionService
         $repository = $this->objectManager->getRepository($this->objectClassName);
         parent::dispatchAction();
         $items = $repository->findAll();
-        $this->executionTime = microtime(true) - $this->executionTime;
+        $this->setExecutionTime();
         $this->rowCounter = count($items);
 
         return $this;

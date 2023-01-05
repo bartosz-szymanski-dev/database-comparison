@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Entity\MongoDB;
+namespace App\Document;
 
-use App\Entity\DataInterface;
+use App\Model\DataInterface;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
-/** @ODM\Document */
+/** @ODM\Document(repositoryClass="App\Repository\ElectricVehiclePopulationDataDocumentRepository") */
 class ElectricVehiclePopulationDataDocument implements DataInterface
 {
     /** @ODM\Id */

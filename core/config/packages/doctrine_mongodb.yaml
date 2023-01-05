@@ -13,8 +13,8 @@ doctrine_mongodb:
                 App:
                     is_bundle: false
                     type: annotation
-                    dir: '%kernel.project_dir%/src/Entity/MongoDB'
-                    prefix: 'App\Entity\MongoDB'
+                    dir: '%kernel.project_dir%/src/Document'
+                    prefix: 'App\Document'
                     alias: MongoDB
 
 when@prod:

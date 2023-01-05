@@ -2,14 +2,13 @@
 
 namespace App\Controller\MongoDB;
 
-use App\Entity\MongoDB\ElectricVehiclePopulationDataDocument;
+use App\Document\ElectricVehiclePopulationDataDocument;
 use App\Service\Action\GetAllActionService;
 use Doctrine\ODM\MongoDB\DocumentManager;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class GetAllController extends AbstractController
+class GetAllController extends AbstractMongoDbBenchmarkController
 {
     #[Route(
         '/mongo-db/get-all',
@@ -26,9 +25,6 @@ class GetAllController extends AbstractController
             ->withObjectClassName(ElectricVehiclePopulationDataDocument::class)
             ->dispatchAction();
 
-        return $this->render('MongoDB/get_all.html.twig', [
-            'executionTime' => round($getAllActionService->getExecutionTime(), 2),
-            'recordCount' => $getAllActionService->getRowCounter(),
-        ]);
+        return $this->renderBenchmark($getAllActionService);
     }
 }

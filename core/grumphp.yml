@@ -4,7 +4,7 @@ grumphp:
             standard: "PSR12"
             encoding: "UTF-8"
             ignore_patterns:
-                - 'src/DoctrineMigrations/'
+                - 'migrations/'
                 - 'shared/'
                 - 'var/'
                 - 'public/'

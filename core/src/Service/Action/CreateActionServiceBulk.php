@@ -8,7 +8,7 @@ use League\Csv\Statement;
 use League\Csv\TabularDataReader;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-class CreateActionService extends AbstractActionService
+class CreateActionServiceBulk extends BulkFlushActionService
 {
     private FactoryInterface $factory;
 
@@ -18,12 +18,14 @@ class CreateActionService extends AbstractActionService
 
     public function dispatchAction(): self
     {
+        $records = $this->getRecords();
+        $this->rowCounter = count($records);
         parent::dispatchAction();
         foreach ($this->getRecords() as $record) {
             $this->flushAndClear();
             $this->createAndPersist($record);
         }
-        $this->executionTime = microtime(true) - $this->executionTime;
+        $this->setExecutionTime();
 
         return $this;
     }

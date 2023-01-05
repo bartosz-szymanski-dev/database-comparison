@@ -2,14 +2,13 @@
 
 namespace App\Controller\MongoDB;
 
-use App\Service\Action\CreateActionService;
+use App\Service\Action\CreateActionServiceBulk;
 use App\Service\Factory\Entity\MongoDB\ElectricVehiclePopulationDataDocumentFactory;
 use Doctrine\ODM\MongoDB\DocumentManager;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CreateController extends AbstractController
+class CreateController extends AbstractMongoDbBenchmarkController
 {
     #[Route(
         '/mongo-db/create',
@@ -19,17 +18,13 @@ class CreateController extends AbstractController
     public function __invoke(
         DocumentManager $documentManager,
         ElectricVehiclePopulationDataDocumentFactory $evpDataFactory,
-        CreateActionService $createActionService,
+        CreateActionServiceBulk $createActionService,
     ): Response {
-        ini_set('memory_limit', '2G');
         $createActionService
             ->withObjectManager($documentManager)
             ->withFactory($evpDataFactory)
             ->dispatchAction();
 
-        return $this->render('MongoDB/create.html.twig', [
-            'rowCounter' => $createActionService->getRowCounter(),
-            'executionTime' => $createActionService->getExecutionTime(),
-        ]);
+        return $this->renderBenchmark($createActionService);
     }
 }

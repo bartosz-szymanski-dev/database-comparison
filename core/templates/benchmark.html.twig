@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}MongoDB - Znajdź wszystkie rekordy{% endblock %}
+{% block title %}MongoDB - Stwórz dane{% endblock %}
 
 {% block body %}
     {{ parent() }}
@@ -8,7 +8,11 @@
     <div class="container">
         <div class="row">
             <div class="col-12 py-4">
-                <strong>Czas trwania zapytania: {{ executionTime }}s</strong>
+                <h1>{{ dbType }}</h1>
+            </div>
+
+            <div class="col-12 py-4">
+                <strong>Czas trwania insercji rekordów: {{ executionTime }}s</strong>
             </div>
 
             <div class="col-12 py-4">

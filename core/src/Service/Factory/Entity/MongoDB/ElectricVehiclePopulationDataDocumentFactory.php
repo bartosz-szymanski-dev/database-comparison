@@ -2,7 +2,7 @@
 
 namespace App\Service\Factory\Entity\MongoDB;
 
-use App\Entity\MongoDB\ElectricVehiclePopulationDataDocument;
+use App\Document\ElectricVehiclePopulationDataDocument;
 use App\Service\Factory\Entity\FactoryInterface;
 
 class ElectricVehiclePopulationDataDocumentFactory implements FactoryInterface
