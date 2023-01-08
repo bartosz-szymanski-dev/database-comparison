@@ -2,7 +2,7 @@
 
 namespace App\Service\Action;
 
-use App\Service\Factory\Entity\FactoryInterface;
+use App\Service\Factory\FactoryInterface;
 use League\Csv\Reader;
 use League\Csv\Statement;
 use League\Csv\TabularDataReader;
@@ -18,11 +18,9 @@ class CreateActionServiceBulk extends BulkFlushActionService
 
     public function dispatchAction(): self
     {
-        $records = $this->getRecords();
-        $this->rowCounter = count($records);
         parent::dispatchAction();
         foreach ($this->getRecords() as $record) {
-            $this->flushAndClear();
+            $this->bulkFlushAndClear();
             $this->createAndPersist($record);
         }
         $this->setExecutionTime();
@@ -38,14 +36,6 @@ class CreateActionServiceBulk extends BulkFlushActionService
             ->setHeaderOffset(0);
 
         return (new Statement())->process($csv);
-    }
-
-    private function flushAndClear(): void
-    {
-        if ($this->rowCounter++ % 50 === 0) {
-            $this->objectManager->flush();
-            $this->objectManager->clear();
-        }
     }
 
     private function createAndPersist(array $record): void

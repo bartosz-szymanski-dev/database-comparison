@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\MongoDB;
+namespace App\Controller\Document;
 
 use App\Document\ElectricVehiclePopulationDataDocument;
 use App\Service\Action\DeleteAllActionServiceBulk;
@@ -25,5 +25,14 @@ class DeleteAllController extends AbstractMongoDbBenchmarkController
             ->dispatchAction();
 
         return $this->renderBenchmark($deleteAllActionService);
+    }
+
+    protected function getPageTitle(): string
+    {
+        return sprintf(
+            '%s - %s',
+            $this->getDbType(),
+            $this->translator->trans('action_type.delete_all'),
+        );
     }
 }

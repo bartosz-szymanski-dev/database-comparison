@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Service\Factory\Entity\MongoDB;
+namespace App\Service\Factory;
 
-use App\Document\ElectricVehiclePopulationDataDocument;
-use App\Service\Factory\Entity\FactoryInterface;
+use App\Entity\ElectricVehiclePopulationDataEntity;
 
-class ElectricVehiclePopulationDataDocumentFactory implements FactoryInterface
+class ElectricVehiclePopulationDataEntityFactory implements FactoryInterface
 {
-    public function createFromImportItem(array $item): ElectricVehiclePopulationDataDocument
+    public function createFromImportItem(array $item): ElectricVehiclePopulationDataEntity
     {
-        return (new ElectricVehiclePopulationDataDocument())
+        return (new ElectricVehiclePopulationDataEntity())
             ->setVin($item['VIN'])
             ->setCounty($item['County'])
             ->setCity($item['City'])

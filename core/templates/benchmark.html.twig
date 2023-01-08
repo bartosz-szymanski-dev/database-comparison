@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}MongoDB - Stwórz dane{% endblock %}
+{% block title %}{{ pageTitle }}{% endblock %}
 
 {% block body %}
     {{ parent() }}
@@ -12,7 +12,7 @@
             </div>
 
             <div class="col-12 py-4">
-                <strong>Czas trwania insercji rekordów: {{ executionTime }}s</strong>
+                <strong>Czas trwania zapytania: {{ executionTime }}s</strong>
             </div>
 
             <div class="col-12 py-4">

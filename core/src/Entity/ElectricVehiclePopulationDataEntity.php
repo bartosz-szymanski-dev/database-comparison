@@ -1,77 +1,73 @@
 <?php
 
-namespace App\Document;
+namespace App\Entity;
 
 use App\Model\DataInterface;
-use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
+use App\Repository\ElectricVehiclePopulationDataEntityRepository;
+use Doctrine\ORM\Mapping as ORM;
 
-/** @ODM\Document(repositoryClass="App\Repository\ElectricVehiclePopulationDataDocumentRepository") */
-class ElectricVehiclePopulationDataDocument implements DataInterface
+#[ORM\Entity(repositoryClass: ElectricVehiclePopulationDataEntityRepository::class)]
+class ElectricVehiclePopulationDataEntity implements DataInterface
 {
-    /** @ODM\Id */
-    private string $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id;
 
-    /** @ODM\Field(type="string") */
+    #[ORM\Column(type: 'string', length: 255)]
     private string $vin;
 
-    /** @ODM\Field(type="string") */
+    #[ORM\Column(type: 'string', length: 255)]
     private string $county;
 
-    /** @ODM\Field(type="string") */
+    #[ORM\Column(type: 'string', length: 255)]
     private string $city;
 
-    /** @ODM\Field(type="string") */
+    #[ORM\Column(type: 'string', length: 255)]
     private string $state;
 
-    /** @ODM\Field(type="int") */
+    #[ORM\Column(type: 'integer')]
     private int $postalCode;
 
-    /** @ODM\Field(type="int") */
+    #[ORM\Column(type: 'integer')]
     private int $modelYear;
 
-    /** @ODM\Field(type="string") */
+    #[ORM\Column(type: 'string', length: 255)]
     private string $make;
 
-    /** @ODM\Field(type="string") */
+    #[ORM\Column(type: 'string', length: 255)]
     private string $model;
 
-    /** @ODM\Field(type="string") */
+    #[ORM\Column(type: 'string', length: 255)]
     private string $electricVehicleType;
 
-    /** @ODM\Field(type="string") */
+    #[ORM\Column(type: 'string', length: 255)]
     private string $cleanAlternativeFuelVehicleEligibility;
 
-    /** @ODM\Field(type="int") */
+    #[ORM\Column(type: 'integer')]
     private int $electricRange;
 
-    /** @ODM\Field(type="int") */
-    private string $baseMSRP;
+    #[ORM\Column(type: 'integer')]
+    private int $baseMSRP;
 
-    /** @ODM\Field(type="string", nullable=true) */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $legislativeDistrict = null;
 
-    /** @ODM\Field(type="int") */
+    #[ORM\Column(type: 'integer')]
     private int $dolVehicleID;
 
-    /** @ODM\Field(type="string") */
+    #[ORM\Column(type: 'string', length: 255)]
     private string $vehicleLocation;
 
-    /** @ODM\Field(type="string", nullable=true) */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $electricUtility = null;
 
-    /** @ODM\Field(type="string") */
+    #[ORM\Column(type: 'string')]
     private int $censusTract;
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     public function getVin(): string
@@ -206,12 +202,12 @@ class ElectricVehiclePopulationDataDocument implements DataInterface
         return $this;
     }
 
-    public function getBaseMSRP(): string
+    public function getBaseMSRP(): int
     {
         return $this->baseMSRP;
     }
 
-    public function setBaseMSRP(string $baseMSRP): self
+    public function setBaseMSRP(int|string $baseMSRP): self
     {
         $this->baseMSRP = $baseMSRP;
 
@@ -259,7 +255,7 @@ class ElectricVehiclePopulationDataDocument implements DataInterface
         return $this->electricUtility;
     }
 
-    public function setElectricUtility(string $electricUtility): self
+    public function setElectricUtility(?string $electricUtility): self
     {
         $this->electricUtility = $electricUtility;
 

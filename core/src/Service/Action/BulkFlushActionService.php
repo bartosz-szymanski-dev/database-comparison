@@ -6,8 +6,9 @@ abstract class BulkFlushActionService extends AbstractActionService
 {
     protected function bulkFlushAndClear(): void
     {
-        if ($this->rowCounter++ % 50 === 0) {
+        if (++$this->rowCounter % 50 === 0) {
             $this->objectManager->flush();
+            $this->objectManager->clear();
         }
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\MongoDB;
+namespace App\Controller\Document;
 
 use App\Document\ElectricVehiclePopulationDataDocument;
 use App\Service\Action\GetAllActionService;
@@ -19,12 +19,21 @@ class GetAllController extends AbstractMongoDbBenchmarkController
         DocumentManager $documentManager,
         GetAllActionService $getAllActionService,
     ): Response {
-        ini_set('memory_limit', '2G');
+        ini_set('memory_limit', '4G');
         $getAllActionService
             ->withObjectManager($documentManager)
             ->withObjectClassName(ElectricVehiclePopulationDataDocument::class)
             ->dispatchAction();
 
         return $this->renderBenchmark($getAllActionService);
+    }
+
+    protected function getPageTitle(): string
+    {
+        return sprintf(
+            '%s - %s',
+            $this->getDbType(),
+            $this->translator->trans('action_type.get_all'),
+        );
     }
 }

@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 abstract class AbstractBenchmarkController extends AbstractController
 {
     abstract protected function getDbType(): string;
+    abstract protected function getPageTitle(): string;
 
     protected function renderBenchmark(AbstractActionService $service): Response
     {
@@ -21,6 +22,7 @@ abstract class AbstractBenchmarkController extends AbstractController
     private function getParameters(AbstractActionService $service): array
     {
         return [
+            'pageTitle' => $this->getPageTitle(),
             'dbType' => $this->getDbType(),
             'executionTime' => round($service->getExecutionTime(), 2),
             'recordCount' => $service->getRowCounter(),

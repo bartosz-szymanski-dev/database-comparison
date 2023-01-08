@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Controller\MongoDB;
+namespace App\Controller\Document;
 
 use App\Controller\AbstractBenchmarkController;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 abstract class AbstractMongoDbBenchmarkController extends AbstractBenchmarkController
 {
-    public function __construct(private readonly TranslatorInterface $translator)
+    public function __construct(protected readonly TranslatorInterface $translator)
     {
     }
 

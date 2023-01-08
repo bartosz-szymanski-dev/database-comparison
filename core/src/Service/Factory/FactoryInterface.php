@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Factory\Entity;
+namespace App\Service\Factory;
 
 use App\Model\DataInterface;
 

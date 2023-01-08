@@ -48,8 +48,8 @@ apt install nginx php8.1-fpm -y
 
 # Install Composer
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php -r "if (hash_file('sha384', 'composer-setup.php') === '906a84df04cea2aa72f40b5f787e49f22d4c2f19492ac310e8cba5b96ac8b64115ac402c8cd292b8a03482574915d1a8') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-php composer-setup.php --version=2.1.12
+php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
 php -r "unlink('composer-setup.php');"
 mv composer.phar /usr/local/bin/composer
 
@@ -59,14 +59,16 @@ printf "\nPATH=\"/home/core/.composer/vendor/bin:\$PATH\"\n" | tee -a /home/core
 # Set Some PHP CLI Settings
 sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/8.1/cli/php.ini
 sed -i "s/display_errors = .*/display_errors = On/" /etc/php/8.1/cli/php.ini
-sed -i "s/memory_limit = .*/memory_limit = 512M/" /etc/php/8.1/cli/php.ini
+sed -i "s/memory_limit = .*/memory_limit = 2G/" /etc/php/8.1/cli/php.ini
+sed -i "s/max_execution_time = .*/max_execution_time = 600/" /etc/php/8.1/cli/php.ini
 sed -i "s/;date.timezone.*/date.timezone = UTC/" /etc/php/8.1/cli/php.ini
 
 sed -i "s/.*daemonize.*/daemonize = no/" /etc/php/8.1/fpm/php-fpm.conf
 sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/8.1/fpm/php.ini
 sed -i "s/display_errors = .*/display_errors = On/" /etc/php/8.1/fpm/php.ini
 sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php/8.1/fpm/php.ini
-sed -i "s/memory_limit = .*/memory_limit = 512M/" /etc/php/8.1/fpm/php.ini
+sed -i "s/memory_limit = .*/memory_limit = 2G/" /etc/php/8.1/fpm/php.ini
+sed -i "s/max_execution_time = .*/max_execution_time = 600/" /etc/php/8.1/fpm/php.ini
 sed -i "s/;date.timezone.*/date.timezone = UTC/" /etc/php/8.1/fpm/php.ini
 
 # Enable Remote xdebug
@@ -104,3 +106,5 @@ service nginx start -d
 service php8.1-fpm start -d
 
 nginx -s reload
+
+composer install

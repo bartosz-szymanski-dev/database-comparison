@@ -3,17 +3,18 @@
 namespace App\Service\Action;
 
 use App\Repository\ElectricVehiclePopulationDataRepositoryInterface;
+use App\Service\RandomStringGenerator;
 
-class DeleteAllActionServiceBulk extends BulkFlushActionService
+class UpdateAllActionService extends BulkFlushActionService
 {
     private string $objectClassName;
 
     public function dispatchAction(): self
     {
-        parent::dispatchAction();
         /** @var ElectricVehiclePopulationDataRepositoryInterface $repository */
         $repository = $this->objectManager->getRepository($this->objectClassName);
-        $this->rowCounter = $repository->deleteAll();
+        parent::dispatchAction();
+        $repository->updateAll();
         $this->setExecutionTime();
 
         return $this;
